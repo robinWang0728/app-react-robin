@@ -1,0 +1,38 @@
+@import-normalize;
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+
+@for $i from 1 through 100 {
+  .w-#{$i} {
+    width: $i*1%;
+  }
+  .h-#{$i} {
+    height: $i*1%;
+  }
+}
+
+@mixin flex($align, $justify, $direction) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin w_h($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin p_m($padding, $marign) {
+  padding: $padding;
+  margin: $marign;
+}
+
+@import "header";
+@import "product";
+@import "shop";
+@import "cart";
