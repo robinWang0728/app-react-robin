@@ -1,17 +1,24 @@
 @import-normalize;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
 
 a {
   text-decoration: none;
   color: unset;
 }
 
-
 @for $i from 1 through 100 {
   .w-#{$i} {
-    width: $i*1%;
+    width: $i * 1%;
   }
   .h-#{$i} {
-    height: $i*1%;
+    height: $i * 1%;
   }
 }
 
@@ -31,8 +38,33 @@ a {
   padding: $padding;
   margin: $marign;
 }
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 1rem;
+}
+
+.page {
+  @include w_h(95vw, 95vh);
+  @include flex(center, center, row);
+  position: relative;
+  background: #eeeff1;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 8px #bebecb;
+  .page__bar {
+    height: 100%;
+    flex-basis: 20%;
+  }
+  .page__content {
+    height: 100%;
+    flex-basis: 80%;
+  }
+}
 
 @import "header";
 @import "product";
-@import "shop";
 @import "cart";
+@import "sideBar.scss";

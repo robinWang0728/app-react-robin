@@ -13,7 +13,6 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import { useEffect } from "react";
 
-
 const links = [
   {
     label: "Features",
@@ -30,7 +29,6 @@ const links = [
 ];
 
 export const Header = () => {
- 
   const headerRef = useRef(null);
   useEffect(() => {
     window.addEventListener("scroll", () => {
