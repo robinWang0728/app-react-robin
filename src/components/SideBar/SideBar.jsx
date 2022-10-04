@@ -115,7 +115,7 @@ const SideBar = () => {
           <div className="sideBar__card-circle sideBar__card-circle--left"></div>
           <p className="sideBar__card-title">Help Center</p>
           <p className="sideBar__card-text">
-            Having trouble in ILUVIU, please contact us from for more questions.
+            {/* Having trouble in ILUVIU, please contact us from for more questions. */}
           </p>
           <button className="sideBar__card-btn">Go to help center</button>
           <div className="sideBar__card-circle sideBar__card-circle--right"></div>
