@@ -94,10 +94,17 @@ const SideBar = () => {
           </li>
 
           <li className="sideBar__menu-listItem">
-            <div className="sideBar__menu-link">
-              <AiFillCalendar className="icon" />
+            <NavLink
+              to={"/contact"}
+              className={({ isActive }) =>
+                isActive
+                  ? "sideBar__menu-link sideBar__menu-link--active"
+                  : "sideBar__menu-link"
+              }
+            >
+                <AiFillCalendar className="icon" />
               <span className="smallText">Contact</span>
-            </div>
+            </NavLink>
           </li>
 
           <li className="sideBar__menu-listItem">

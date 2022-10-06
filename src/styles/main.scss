@@ -15,16 +15,19 @@ a {
 
 @for $i from 1 through 100 {
   .w-#{$i} {
-    width: $i * 1%;
+    width: $i * 1% !important;
   }
   .h-#{$i} {
-    height: $i * 1%;
+    height: $i * 1% !important;
   }
   .m-l-#{$i} {
-    margin-left: #{($i * 1)}px;
+    margin-left: #{($i * 1)}px !important;
+  }
+  .m-t-#{$i} {
+    margin-top: #{($i * 1)}px !important;
   }
   .flex-b-#{$i} {
-    flex-basis: $i * 1%;
+    flex-basis: $i * 1% !important;
   }
 }
 .flex-column {
@@ -81,3 +84,5 @@ body {
 @import "product";
 @import "cart";
 @import "sideBar.scss";
+@import "contact.scss";
+

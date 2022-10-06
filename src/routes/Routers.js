@@ -1,3 +1,4 @@
+import Contact from "pages/Contact";
 import Home from "pages/Home";
 import Proudct from "pages/Products";
 import React from "react";
@@ -9,6 +10,7 @@ const Routers = () => {
       <Route path="/" element={<Navigate to="/home" />} />
       <Route path="/home" element={<Home />} />
       <Route path="/product/*" element={<Proudct />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 };

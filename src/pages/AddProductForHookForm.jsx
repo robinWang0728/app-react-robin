@@ -2,8 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import ProductService from "services/ProductService";
-
+import CustomSelect from "components/Form/Select/CustomSelect";
 const AddProductForHookForm = () => {
   const validationSchema = Yup.object().shape({
     productName: Yup.string().required("Product Name is required"),
@@ -13,13 +12,12 @@ const AddProductForHookForm = () => {
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, setError, formState } = useForm(formOptions);
+  const { register, handleSubmit, setValue, formState } = useForm(formOptions);
   const { errors } = formState;
 
   const onSubmit = (data) => {
-    console.log(formState);
     console.log(data);
-    console.log(JSON.stringify(data, null, 2));
+    // console.log(JSON.stringify(data, null, 2));
     // ProductService.createProduct(data)
     //   .then((response) => {
     //     console.log(response.data);
@@ -48,6 +46,7 @@ const AddProductForHookForm = () => {
               {errors.productName?.message}
             </div>
           </div>
+
           <div className="product__form-item">
             <input
               name="price"
@@ -131,24 +130,34 @@ const AddProductForHookForm = () => {
 
           <div className="product__form-item  flex-row">
             <label htmlFor="favorite" className="product__form-switch">
-              <input type="checkbox" id="favorite" name="favorite"  {...register("favorite", {})}/>
+              <input
+                type="checkbox"
+                id="favorite"
+                name="favorite"
+                {...register("favorite", {})}
+              />
               <span className="product__form-toggle"></span>
               <span className="product__form-text">Favorite</span>
             </label>
           </div>
 
           <div className="product__form-item">
-            <select name="kind" {...register("kind")}>
-              <option value="">Select a kind</option>
-              <option value="red">red</option>
-              <option value="blue">blue</option>
-              <option value="green">green</option>
-            </select>
+            <CustomSelect
+              options={[
+                { value: "", label: "Select a kind" },
+                { value: "red", label: "Red" },
+                { value: "blue", label: "Blue" },
+                { value: "green", label: "Green" },
+              ]}
+              error={Boolean(errors.kind)}
+              value={""}
+              name="kind"
+              props={{ register: register, setValue:setValue }}
+            />
             <div className="product__form-text--error">
               {errors.kind?.message}
             </div>
           </div>
-
           <div className="product__form-item">
             <button
               disabled={formState.isSubmitting}
