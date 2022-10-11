@@ -1,4 +1,4 @@
-import api from "api/api";
+import api from "utils/api";
 
 const getAllProduct = () => {
   return api.get("/product");

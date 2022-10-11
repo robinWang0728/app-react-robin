@@ -1,30 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import CustomSelect from "components/Form/Select/CustomSelect";
+import UploadController from "components/UI/upload-controller/UploadController";
+import ProductService from "services/ProductService";
+import { getBase64 } from "utils/utils";
 const AddProductForHookForm = () => {
+  const [picture, setPicture] = useState(null);
+
+  const onChangePicture = (e) => {
+    setPicture(URL.createObjectURL(e.target.files[0]));
+  };
+
   const validationSchema = Yup.object().shape({
     productName: Yup.string().required("Product Name is required"),
     price: Yup.string().required("Price is required"),
     enable: Yup.string().nullable(true).required("Enable is required"),
-    kind: Yup.string().required("Ｋind is required!"),
+    kind: Yup.string().required("kind is required!"),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
-  const { register, handleSubmit, setValue, formState } = useForm(formOptions);
-  const { errors } = formState;
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState,
+    formState: { errors },
+    control,
+  } = useForm(formOptions);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    const { productName, price, enable, other, favorite, kind, image } = data;
+    const imgBase64 = await getBase64(data.image[0]);
+    // console.log(data);
     // console.log(JSON.stringify(data, null, 2));
-    // ProductService.createProduct(data)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
+
+    const param = {
+      productName,
+      price,
+      enable,
+      other,
+      favorite,
+      kind,
+      image: imgBase64,
+    };
+    console.log(param);
+    ProductService.createProduct(param)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -152,12 +181,32 @@ const AddProductForHookForm = () => {
               error={Boolean(errors.kind)}
               value={""}
               name="kind"
-              props={{ register: register, setValue:setValue }}
+              props={{ register: register, setValue: setValue }}
             />
             <div className="product__form-text--error">
               {errors.kind?.message}
             </div>
           </div>
+
+          <div className="product__form-item">
+            <label htmlFor="Image">Image: </label>
+            <input
+              type="file"
+              {...register("image", { required: true })}
+              onChange={onChangePicture}
+            />
+            <div className="product__form-text--error">
+              {errors.file && <p>Please select an image</p>}
+            </div>
+          </div>
+          <div className="product__form-item">
+            <UploadController
+              name="uploadFile2"
+              errors={errors}
+              control={control}
+            />
+          </div>
+
           <div className="product__form-item">
             <button
               disabled={formState.isSubmitting}
@@ -177,3 +226,6 @@ const AddProductForHookForm = () => {
 };
 
 export default AddProductForHookForm;
+function converImageToBase64(arg0) {
+  throw new Error("Function not implemented.");
+}

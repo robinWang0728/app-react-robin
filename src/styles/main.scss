@@ -1,6 +1,7 @@
 @import-normalize;
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
-
+$red: #F6546A;
+$primary-color : #778fba;
 * {
   padding: 0;
   margin: 0;
@@ -11,6 +12,10 @@
 a {
   text-decoration: none;
   color: unset;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 @for $i from 1 through 100 {
@@ -72,12 +77,17 @@ body {
   box-shadow: 2px 2px 8px #bebecb;
   .page__bar {
     height: 100%;
-    flex-basis: 20%;
+    width: 20%;
   }
   .page__content {
     height: 100%;
-    flex-basis: 80%;
+    width: 80%;
   }
+}
+
+.text-danger{
+  color: $red;
+
 }
 
 @import "header";
@@ -85,4 +95,4 @@ body {
 @import "cart";
 @import "sideBar.scss";
 @import "contact.scss";
-
+@import "spinner.scss";
