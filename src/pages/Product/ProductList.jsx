@@ -8,23 +8,25 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 const ProductList = () => {
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
-  
+  const [_, setUpdated] = useState(false);
   const [originProductList, setOriginProductList] = useState([]);
   const [productList, setProductList] = useState([]);
   const [productListData, setProductListData] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [sorttype, setSorttype] = useState(["desc", "asc",]);
   const Sort = sorttype.map(x => x)
-  const handleAddrTypeChange = (e) => console.log((sorttype[e.target.value]))
+  const handleAddrTypeChange = (e) => console.log(sorttype[e.target.value]);
   const getProducts = async () => {
     try {
       showLoading();
       let response = await ProductService.getAllProduct();
       const list = response.data;
-      const listData = spliceList(list);
+      // console.log([...list]);
+      // const listData = spliceList(list);
+      // console.log([...list]);
       setOriginProductList(list);
-      setProductListData(listData);
-      setProductList(listData[0]);
+      // setProductListData(listData);
+      // setProductList(listData[0]);
       setSelectedIndex(0);
       hideLoading();
     } catch (error) {
@@ -32,20 +34,28 @@ const ProductList = () => {
     }
   };
 
-  const updateFavor = (data) => {
-    const param = { ...data, favor: !data.favor };
-    ProductService.updateProduct(param.id, param)
-      .then((response) => {
-        setOriginProductList((state) =>
-          state.map((product) =>
-            product.id === param.id ? { ...param } : product
-          )
-        );
-        console.log(productListData);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+  const updateFavor = async (data) => {
+    const { id: productId, favor } = data;
+    await ProductService.updateProduct(productId, data);
+    // setOriginProductList((state) =>
+    //   state.map((product) => {
+    //     if (product.id === productId) {
+    //       return {
+    //         ...product,
+    //         favor: !favor,
+    //       }
+    //     }
+    //     return product;
+    //   })
+    // );
+    setOriginProductList((state) => {
+      const index = state.findIndex(p => p.id === productId);
+      console.log(index);
+      state[index] = { ...data, favor: !favor };
+      console.log(state[index]);
+      return state;
+    });
+    setUpdated(!_);
   };
 
   const pageChange = (i) => {
@@ -58,11 +68,11 @@ const ProductList = () => {
     getProducts();
   }, []);
 
-  useEffect(() => {
-    const listData = spliceList(originProductList);
-    console.log(listData)
-    setProductListData(listData);
-  }, [originProductList]);
+  // useEffect(() => {
+  //   const listData = spliceList(originProductList);
+  //   console.log(listData)
+  //   setProductListData(listData);
+  // }, [originProductList]);
 
 
   return (
@@ -77,8 +87,12 @@ const ProductList = () => {
                 }
               </select >
           }
-        {productList.map((product) => (
-          <ProductCard item={product} updateFavor={updateFavor} />
+        {originProductList.map((product) => (
+          <ProductCard
+            key={product.id}
+            item={product}
+            updateFavor={updateFavor}
+          />
         ))}
         <div className="pagination flex-b-100">
           <button className="pagination__btn">
