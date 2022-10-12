@@ -2,6 +2,8 @@
   height: 100%;
   overflow: auto;
   padding: 1.5rem;
+
+
   .proudct__list {
     @include p_m(24px, 0 auto);
     @include flex(unset, unset, row);
@@ -282,7 +284,7 @@
           }
           &:disabled {
             + .product__form-toggle {
-              background: #D6D6D6;
+              background: #d6d6d6;
             }
           }
         }

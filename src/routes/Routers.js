@@ -1,6 +1,6 @@
 import Contact from "pages/Contact";
 import Home from "pages/Home";
-import Proudct from "pages/Products";
+import Proudct from "pages/Product/Products";
 import React, { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 

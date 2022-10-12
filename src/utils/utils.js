@@ -21,3 +21,10 @@ export  const convertBase64 = (file) => {
     }
   })
 }
+
+export const spliceList = (list, size = 10) => {
+  const result = new Array(Math.ceil(list.length / size))
+    .fill()
+    .map((_) => list.splice(0, size));
+  return result;
+};
