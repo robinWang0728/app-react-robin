@@ -10,9 +10,7 @@ const ProductList = () => {
 
 	const [productList, setProductList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	useEffect(() => {
-		console.log('render');
-	});
+	console.log('render');
 	const handleSortChange = (e) => {
 		if (e.target.value === 'desc') {
 			setProductList((state) => {
