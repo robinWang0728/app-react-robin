@@ -31,11 +31,15 @@ const Pagination = (props) => {
 			</button>
 			{paginationRange.map((pageNumber) => {
 				if (pageNumber === DOTS) {
-					return <span className='pagination__text'>&#8230;</span>;
+					return (
+						<span key={pageNumber} className='pagination__text'>
+							{DOTS}
+						</span>
+					);
 				}
 
 				return (
-					<button className={`pagination__btn ${pageNumber === currentPage ? 'pagination__btn--active' : ''}`} onClick={() => onPageChange(pageNumber)}>
+					<button key={pageNumber} className={`pagination__btn ${pageNumber === currentPage ? 'pagination__btn--active' : ''}`} onClick={() => onPageChange(pageNumber)}>
 						{pageNumber}
 					</button>
 				);

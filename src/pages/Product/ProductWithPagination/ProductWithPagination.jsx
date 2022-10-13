@@ -2,7 +2,7 @@ import ProductCard from 'components/UI/product-card/ProductCard';
 import { LoadingContext } from 'contexts/LoadingContext';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import ProductService from 'services/ProductService';
-import Pagination from '../Pagination';
+import Pagination from './Pagination';
 
 const ProductWithPagination = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);

@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import ProductService from 'services/ProductService';
 import { spliceList } from 'utils/utils';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import Pagination from './Pagination';
+import Pagination from './ProductWithPagination/Pagination';
 
 const ProductList = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
