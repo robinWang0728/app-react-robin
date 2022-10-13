@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import useOutsideClick from './hooks/useOutSideClick';
+import useOutsideClick from './useOutSideClick';
 import './custom-select.css';
 
-const CustomSelect = ({ options, selectProps, value, error = false, name }) => {
+const CustomSelect = ({ options, value, error = false, name, onChange }) => {
 	const [isOpen, setOpen] = useState(false);
 	const [selected, setSelected] = useState(value);
 	const selectRef = useRef(null);
@@ -13,14 +13,13 @@ const CustomSelect = ({ options, selectProps, value, error = false, name }) => {
 
 	useEffect(() => {
 		const element = document.getElementById(name);
-		if (element) {
-			element.value = selected;
-		}
+		element.value = selected;
+		const customEvent = new Event('change', { bubbles: true, cancelable: false });
+		element.dispatchEvent(customEvent);
 	}, [selected]);
-
 	return (
 		<>
-			<select {...selectProps} id={name} name={name} className='ccustomSelect__el'>
+			<select id={name} name={name} className='customSelect__el' onChange={onChange}>
 				{options.map((item) => (
 					<option key={item.value} value={item.value}>
 						{item.label}
@@ -38,7 +37,7 @@ const CustomSelect = ({ options, selectProps, value, error = false, name }) => {
 				<div className={`customSelect__select ${isOpen && 'open'}`}>
 					<div className='customSelect__trigger'>
 						<span>{options.find((item) => item.value === selected)?.label || 'Select'}</span>
-						<div className='arrow'></div>
+						<div className='customSelect__arrow'></div>
 					</div>
 					<div className='customSelect__options'>
 						{options.map((item) => (

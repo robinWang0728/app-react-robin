@@ -1,0 +1,109 @@
+.customSelect__el {
+	display: none;
+}
+
+.customSelect {
+	position: relative;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.2);
+	box-shadow: 0 5px 15px rgb(0 0 0 / 5%);
+}
+
+.customSelect__select {
+	padding: 7px 32px 7px 12px;
+	border-radius: 8px;
+	width: 100%;
+	padding-right: 8px;
+	background: transparent;
+	position: relative;
+	cursor: pointer;
+	color: #778fba;
+}
+.customSelect__trigger {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+}
+.customSelect__options {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	transition: all 0.5s;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	padding: 8px;
+	max-height: 200px;
+	overflow-y: auto;
+	gap: 1px;
+}
+.customSelect__select.open .customSelect__options {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: all;
+	margin-top: 4px;
+	border-radius: 4px;
+	background: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 5px 15px rgb(0 0 0 / 5%);
+}
+.customSelect__option {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 0 8px;
+	cursor: pointer;
+	color: #989898;
+	height: 36px;
+}
+
+.customSelect__option-container {
+}
+
+.customSelect__option-container:hover .customSelect__option {
+	cursor: pointer;
+	background: #e3e8f1;
+	color: #778fba;
+}
+
+.customSelect__option.selected {
+	color: #778fba;
+	background: #e3e8f1;
+}
+
+.customSelect__arrow {
+	position: relative;
+	height: 7.72px;
+	width: 12.26px;
+}
+.customSelect__arrow::before,
+.customSelect__arrow::after {
+	content: '';
+	position: absolute;
+	bottom: 0px;
+	width: 0.15rem;
+	height: 100%;
+	transition: all 0.5s;
+	background: #778fba;
+}
+.customSelect__arrow::before {
+	left: -2.5px;
+	transform: rotate(-45deg);
+}
+.customSelect__arrow::after {
+	left: 2.5px;
+	transform: rotate(45deg);
+}
+.customSelect__select.open .customSelect__arrow::before {
+	left: -2.5px;
+	transform: rotate(45deg);
+}
+.customSelect__select.open .customSelect__arrow::after {
+	left: 2.5px;
+	transform: rotate(-45deg);
+}

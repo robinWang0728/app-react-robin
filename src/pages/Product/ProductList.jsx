@@ -1,3 +1,4 @@
+import CustomSelect from 'components/Form/Select3/CustomSelect';
 import ProductCard from 'components/UI/product-card/ProductCard';
 import { LoadingContext } from 'contexts/LoadingContext';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
@@ -9,10 +10,32 @@ const ProductList = () => {
 
 	const [productList, setProductList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-
-	const [sorttype, setSorttype] = useState(['desc', 'asc']);
-	const Sort = sorttype.map((x) => x);
-	const handleAddrTypeChange = (e) => console.log(sorttype[e.target.value]);
+	useEffect(() => {
+		console.log('render');
+	});
+	const handleSortChange = (e) => {
+		if (e.target.value === 'desc') {
+			setProductList((state) => {
+				const sortList = [...state].sort((a, b) => {
+					const aText = a.productName || '';
+					const bText = b.productName || '';
+					return aText.localeCompare(bText, 'zh-Hant');
+				});
+				return sortList;
+			});
+			setCurrentPage(1);
+		} else if (e.target.value === 'asc') {
+			setProductList((state) => {
+				const sortList = [...state].sort((a, b) => {
+					const aText = a.productName || '';
+					const bText = b.productName || '';
+					return bText.localeCompare(aText, 'zh-Hant');
+				});
+				return sortList;
+			});
+			setCurrentPage(1);
+		}
+	};
 
 	const getProducts = async () => {
 		try {
@@ -50,15 +73,19 @@ const ProductList = () => {
 	return (
 		<>
 			<section className='proudct__list'>
-				{
-					<select onChange={(e) => handleAddrTypeChange(e)} className='browser-default custom-select flex-b-100'>
-						{Sort.map((address, key) => (
-							<option value={key} key={address}>
-								{address}
-							</option>
-						))}
-					</select>
-				}
+				<div className='flex-b-100'>
+					<CustomSelect
+						options={[
+							{ value: '', label: 'Select a kind' },
+							{ value: 'desc', label: 'desc' },
+							{ value: 'asc', label: 'Asc' },
+						]}
+						value={''}
+						name='sort'
+						onChange={handleSortChange}
+					/>
+				</div>
+
 				{currentTableData.map((product) => (
 					<ProductCard item={product} key={product.id} updateFavor={updateFavor} />
 				))}
