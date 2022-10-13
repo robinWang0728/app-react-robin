@@ -1,41 +1,41 @@
 .header {
-  @include p_m(12px 24px, 0);
-  box-shadow: rgba(0, 0, 0, 0.05) 1.95px 1.95px 2.6px;
+	@include p_m(12px 24px, 0);
+	box-shadow: rgba(0, 0, 0, 0.05) 1.95px 1.95px 2.6px;
 
-  &.header__shrink {
-    position: sticky;
-    top: 0;
-    left: 0;
-    background: #fff;
-    z-index: 99999;
-    box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.05);
-  }
-  .header__container {
-    @include flex(center, space-between, row);
-  }
-  .header__logo {
-    @include p_m(0, 0);
+	&.header__shrink {
+		position: sticky;
+		top: 0;
+		left: 0;
+		background: #fff;
+		z-index: 99999;
+		box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.05);
+	}
+	.header__container {
+		@include flex(center, space-between, row);
+	}
+	.header__logo {
+		@include p_m(0, 0);
 
-    .header__title {
-      color: #2e5894 !important;
-    }
-  }
-  .header__menus {
-    @include flex(unset, unset, row);
-    gap: 24px;
-    .header__menu {
-      &.header__menu--active {
-        color: #2e5894 !important;
-      }
-    }
-  }
+		.header__title {
+			color: #2e5894 !important;
+		}
+	}
+	.header__menus {
+		@include flex(unset, unset, row);
+		gap: 24px;
+		.header__menu {
+			&.header__menu--active {
+				color: #2e5894 !important;
+			}
+		}
+	}
 
-  .header__rights {
-    @include flex(unset, unset, row);
-    gap: 8px;
-    .header__right {
-      @include flex(center, unset, row);
-      cursor: pointer;
-    }
-  }
+	.header__rights {
+		@include flex(unset, unset, row);
+		gap: 8px;
+		.header__right {
+			@include flex(center, unset, row);
+			cursor: pointer;
+		}
+	}
 }

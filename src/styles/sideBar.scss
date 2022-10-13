@@ -1,135 +1,135 @@
 .sideBar {
-  @include w_h(100%, 100%);
-  background: #fff;
-  box-shadow: 1px 0px 4px #cccccc;
-  gap: 3rem;
-  overflow: auto;
-  position: relative;
-  .sideBar__logo {
-    @include flex(center, center, row);
-    padding: 1.25rem 0;
-    .sideBar__text--logo {
-      color: #778fba;
-      font-size: 2rem;
-    }
-  }
+	@include w_h(100%, 100%);
+	background: #fff;
+	box-shadow: 1px 0px 4px #cccccc;
+	gap: 3rem;
+	overflow: auto;
+	position: relative;
+	.sideBar__logo {
+		@include flex(center, center, row);
+		padding: 1.25rem 0;
+		.sideBar__text--logo {
+			color: #778fba;
+			font-size: 2rem;
+		}
+	}
 
-  .sideBar__menu {
-    .sideBar__menu-title {
-      font-size: 1rem;
-      color: #000;
-      padding: 0.5rem 1.25rem;
-    }
+	.sideBar__menu {
+		.sideBar__menu-title {
+			font-size: 1rem;
+			color: #000;
+			padding: 0.5rem 1.25rem;
+		}
 
-    .sideBar__menu-list {
-      .sideBar__menu-listItem {
-        padding: 0.2rem 1.5rem;
-        width: 100%;
-        position: relative;
-        &::before {
-          position: absolute;
-          content: "";
-          height: 0%;
-          left: 0;
-          width: 5px;
-          bottom: 0;
-          border-top-right-radius: 12px;
-          border-bottom-right-radius: 12px;
-          background: #778fba;
-        }
+		.sideBar__menu-list {
+			.sideBar__menu-listItem {
+				padding: 0.2rem 1.5rem;
+				width: 100%;
+				position: relative;
+				&::before {
+					position: absolute;
+					content: '';
+					height: 0%;
+					left: 0;
+					width: 5px;
+					bottom: 0;
+					border-top-right-radius: 12px;
+					border-bottom-right-radius: 12px;
+					background: #778fba;
+				}
 
-        .sideBar__menu-link {
-          @include flex(center, unset, row);
-          color: #989898;
-          font-weight: 500;
-          .icon {
-            margin-right: 0.5rem;
-          }
-        }
+				.sideBar__menu-link {
+					@include flex(center, unset, row);
+					color: #989898;
+					font-weight: 500;
+					.icon {
+						margin-right: 0.5rem;
+					}
+				}
 
-        &:hover .sideBar__menu-link {
-          color: #778fba;
-          transition: 0;
-        }
+				&:hover .sideBar__menu-link {
+					color: #778fba;
+					transition: 0;
+				}
 
-        &:hover::before {
-          height: 100%;
-          transition: 0.3s ease;
-        }
-        .sideBar__menu-link--active{
-            color: #778fba;
-        }
-      }
-    }
-  }
+				&:hover::before {
+					height: 100%;
+					transition: 0.3s ease;
+				}
+				.sideBar__menu-link--active {
+					color: #778fba;
+				}
+			}
+		}
+	}
 
-  .sideBar__card {
-    width: 100%;
-    padding: 1rem;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-    .icon {
-      position: absolute;
-      background: #778fba;
-      border: 10px solid #fff;
-      font-size: 3rem;
-      border-radius: 50%;
-      top: -8px;
-      right: 50%;
-      transform: translate(50%);
-      z-index: 2;
-      color: #fff;
-    }
-    .sideBar__card-content {
-      position: relative;
-      padding: 1rem;
-      background: #778fba;
-      border-radius: 12px;
-      overflow: hidden;
+	.sideBar__card {
+		width: 100%;
+		padding: 1rem;
+		text-align: center;
+		position: absolute;
+		bottom: 0;
+		.icon {
+			position: absolute;
+			background: #778fba;
+			border: 10px solid #fff;
+			font-size: 3rem;
+			border-radius: 50%;
+			top: -8px;
+			right: 50%;
+			transform: translate(50%);
+			z-index: 2;
+			color: #fff;
+		}
+		.sideBar__card-content {
+			position: relative;
+			padding: 1rem;
+			background: #778fba;
+			border-radius: 12px;
+			overflow: hidden;
 
-      .sideBar__card-title {
-        font-size: 1.5rem;
-        padding: 1rem 0;
-        font-weight: 800;
-        color: #f8f6f7;
-      }
-      .sideBar__card-text {
-        font-size: 0.75rem;
-        color: #f8f6f7;
-        padding-bottom: 1rem;
-        font-weight: 500;
-      }
-      .sideBar__card-btn {
-        position: relative;
-        color: #000;
-        z-index: 2;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        border-radius: 8px;
-        box-shadow: 0 1px 2px #f8f6f7;
-        padding: 0.75rem 1rem;
-      }
-    }
-    .sideBar__card-circle {
-      position: absolute;
-      background: #f9f9f9;
-      border-radius: 50%;
-      opacity: 0.7;
-      z-index: 1;
-      &.sideBar__card-circle--left {
-        height: 100px;
-        width: 100px;
-        top: -50px;
-        left: -50px;
-      }
-      &.sideBar__card-circle--right {
-        height: 100px;
-        width: 100px;
-        bottom: -50px;
-        right: -50px;
-      }
-    }
-  }
+			.sideBar__card-title {
+				font-size: 1.5rem;
+				padding: 1rem 0;
+				font-weight: 800;
+				color: #f8f6f7;
+			}
+			.sideBar__card-text {
+				font-size: 0.75rem;
+				color: #f8f6f7;
+				padding-bottom: 1rem;
+				font-weight: 500;
+			}
+			.sideBar__card-btn {
+				position: relative;
+				color: #000;
+				z-index: 2;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				border-radius: 8px;
+				box-shadow: 0 1px 2px #f8f6f7;
+				padding: 0.75rem 1rem;
+			}
+		}
+		.sideBar__card-circle {
+			position: absolute;
+			background: #f9f9f9;
+			border-radius: 50%;
+			opacity: 0.7;
+			z-index: 1;
+			&.sideBar__card-circle--left {
+				height: 100px;
+				width: 100px;
+				top: -50px;
+				left: -50px;
+			}
+			&.sideBar__card-circle--right {
+				height: 100px;
+				width: 100px;
+				bottom: -50px;
+				right: -50px;
+			}
+		}
+	}
 }

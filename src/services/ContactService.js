@@ -1,15 +1,11 @@
-import api from "utils/api";
-
-
+import api from 'utils/api';
 
 const createContact = (data) => {
-  return api.post("/contact", data);
+	return api.post('/contact', data);
 };
 
-
-
 const ContactService = {
-  createContact
+	createContact,
 };
 
 export default ContactService;
