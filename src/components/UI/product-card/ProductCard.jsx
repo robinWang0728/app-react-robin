@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 import { cartActions } from 'store/cart/cartSlice';
-import ProductService from 'services/ProductService';
 
 const ProductCard = (props) => {
 	const updateFavor = props.updateFavor;
@@ -22,16 +21,6 @@ const ProductCard = (props) => {
 		);
 	};
 
-	// const addToFavor = (data) => () => {
-	//   const param = { ...data, favor: !data.favor };
-	//   ProductService.updateProduct(id, param)
-	//     .then((response) => {
-	//       console.log(response);
-	//     })
-	//     .catch((e) => {
-	//       console.log(e);
-	//     });
-	// };
 	return (
 		<div className='product__item'>
 			<div className='product__img'>

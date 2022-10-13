@@ -7,6 +7,8 @@ import Pagination from './ProductListWithPagination/Pagination';
 const ProductList = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
 
+	const [, setUpdated] = useState(false);
+
 	const [productList, setProductList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -25,12 +27,24 @@ const ProductList = () => {
 			console.error(error);
 		}
 	};
+	useEffect(() => {
+		console.log('render');
+	});
 
 	useEffect(() => {
 		getProducts();
 	}, []);
 
-	const updateFavor = (data) => {};
+	const updateFavor = async (data) => {
+		const { id: productId, favor } = data;
+		await ProductService.updateProduct(productId, data);
+		setProductList((state) => {
+			const index = state.findIndex((p) => p.id === productId);
+			state[index] = { ...data, favor: !favor };
+			return state;
+		});
+		setUpdated((state) => !state);
+	};
 
 	const currentTableData = useMemo(() => {
 		const firstPageIndex = (currentPage - 1) * 10;
@@ -51,7 +65,7 @@ const ProductList = () => {
 					</select>
 				}
 				{currentTableData.map((product) => (
-					<ProductCard item={product} key={product} updateFavor={updateFavor} />
+					<ProductCard item={product} key={product.id} updateFavor={updateFavor} />
 				))}
 				<div className='flex-b-100'>
 					<Pagination className='pagination--product' currentPage={currentPage} totalCount={productList.length} pageLimitSize={10} onPageChange={(page) => setCurrentPage(page)} />
