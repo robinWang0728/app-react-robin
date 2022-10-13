@@ -7,8 +7,6 @@ import Pagination from './ProductListWithPagination/Pagination';
 const ProductList = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
 
-	const [, setUpdated] = useState(false);
-
 	const [productList, setProductList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -27,23 +25,20 @@ const ProductList = () => {
 			console.error(error);
 		}
 	};
-	useEffect(() => {
-		console.log('render');
-	});
 
 	useEffect(() => {
 		getProducts();
 	}, []);
 
-	const updateFavor = async (data) => {
-		const { id: productId, favor } = data;
-		await ProductService.updateProduct(productId, data);
-		setProductList((state) => {
-			const index = state.findIndex((p) => p.id === productId);
-			state[index] = { ...data, favor: !favor };
-			return state;
-		});
-		setUpdated((state) => !state);
+	const updateFavor = (data) => {
+		const param = { ...data, favor: !data.favor };
+		ProductService.updateProduct(param.id, param)
+			.then((response) => {
+				setProductList((state) => state.map((product) => (product.id === param.id ? { ...param } : product)));
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	};
 
 	const currentTableData = useMemo(() => {
