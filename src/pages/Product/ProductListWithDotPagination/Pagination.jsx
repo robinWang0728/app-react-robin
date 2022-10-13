@@ -26,9 +26,12 @@ const Pagination = (props) => {
 	const lastPage = paginationRange[paginationRange.length - 1];
 	return (
 		<div className={`pagination ${className}`}>
-			<button className={'pagination__btn'} onClick={onPrevious}>
-				<MdKeyboardArrowLeft className='icon' />
-			</button>
+			{currentPage !== 1 && (
+				<button className={'pagination__btn'} onClick={onPrevious}>
+					<MdKeyboardArrowLeft className='icon' />
+				</button>
+			)}
+
 			{paginationRange.map((pageNumber) => {
 				if (pageNumber === DOTS) {
 					return (
@@ -44,9 +47,12 @@ const Pagination = (props) => {
 					</button>
 				);
 			})}
-			<button className={'pagination__btn'} onClick={onNext}>
-				<MdKeyboardArrowRight className='icon' />
-			</button>
+
+			{currentPage !== lastPage && (
+				<button className={'pagination__btn'} onClick={onNext}>
+					<MdKeyboardArrowRight className='icon' />
+				</button>
+			)}
 		</div>
 	);
 };

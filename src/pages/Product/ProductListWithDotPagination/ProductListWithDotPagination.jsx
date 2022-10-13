@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useMemo, useState } from 'react';
 import ProductService from 'services/ProductService';
 import Pagination from './Pagination';
 
-const ProductWithPagination = () => {
+const ProductListWithDotPagination = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
 
 	const [productList, setProductList] = useState([]);
@@ -60,4 +60,4 @@ const ProductWithPagination = () => {
 	);
 };
 
-export default ProductWithPagination;
+export default ProductListWithDotPagination;
