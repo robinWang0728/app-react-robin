@@ -50,10 +50,7 @@ const CustomSelect = ({ options, selectProps, value, error = false, name }) => {
 								}}
 								className='customSelect__option-container'
 							>
-								<span
-									className={`customSelect__option ${selected === item.value && 'selected'} `}
-									data-value={item.value}
-								>
+								<span className={`customSelect__option ${selected === item.value && 'selected'} `} data-value={item.value}>
 									{item.label}
 								</span>
 							</div>

@@ -1,6 +1,5 @@
-import React from "react";
-import { useState } from "react";
-
+import React from 'react';
+import { useState } from 'react';
 
 // const useCustomForm = (
 //   callback,
@@ -48,7 +47,6 @@ import { useState } from "react";
 // };
 
 // export default useCustomForm;
-
 
 // const InputField = React.memo((props) => {
 //   const {
@@ -137,7 +135,6 @@ import { useState } from "react";
 //     validationRules: [passwordMatchRule()]
 //   }
 // };
-
 
 // /**
 //  * creates and returns a validation rule object that

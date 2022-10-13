@@ -68,3 +68,22 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+setting.json
+{
+"[javascriptreact]": {
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"editor.formatOnSave": true, // 儲存是格式化
+"editor.codeActionsOnSave": {
+"source.fixAll.eslint": true // 按照 eslint 規則格式化
+},
+"eslint.format.enable": true, // 啟用 ESLint 作為已驗證檔案的格式化程式,
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"files.autoSave": "onFocusChange",
+"[javascript]": {
+"editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"typescript.validate.enable": false,
+"javascript.validate.enable": false
+}

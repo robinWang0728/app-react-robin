@@ -43,10 +43,7 @@ const ProductList = () => {
 		<>
 			<section className='proudct__list'>
 				{
-					<select
-						onChange={(e) => handleAddrTypeChange(e)}
-						className='browser-default custom-select flex-b-100'
-					>
+					<select onChange={(e) => handleAddrTypeChange(e)} className='browser-default custom-select flex-b-100'>
 						{Sort.map((address, key) => (
 							<option value={key}>{address}</option>
 						))}
@@ -56,13 +53,7 @@ const ProductList = () => {
 					<ProductCard item={product} updateFavor={updateFavor} />
 				))}
 				<div className='flex-b-100'>
-					<Pagination
-						className='pagination-bar'
-						currentPage={currentPage}
-						totalCount={productList.length}
-						pageSize={10}
-						onPageChange={(page) => setCurrentPage(page)}
-					/>
+					<Pagination className='pagination-bar' currentPage={currentPage} totalCount={productList.length} pageSize={10} onPageChange={(page) => setCurrentPage(page)} />
 				</div>
 			</section>
 		</>
