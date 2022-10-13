@@ -1,12 +1,10 @@
 import ProductCard from 'components/UI/product-card/ProductCard';
 import { LoadingContext } from 'contexts/LoadingContext';
-import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import ProductService from 'services/ProductService';
-import { spliceList } from 'utils/utils';
-import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
-import Pagination from './Pagination';
+import Pagination from '../Pagination';
 
-const ProductList = () => {
+const ProductWithPagination = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
 
 	const [productList, setProductList] = useState([]);
@@ -62,4 +60,4 @@ const ProductList = () => {
 	);
 };
 
-export default ProductList;
+export default ProductWithPagination;

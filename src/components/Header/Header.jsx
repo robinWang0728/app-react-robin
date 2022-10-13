@@ -1,11 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { BsBagCheck } from 'react-icons/bs';
 import { RiUser3Line } from 'react-icons/ri';
 import { AiOutlineHeart, AiOutlineMenu, AiOutlineClose, AiOutlineDelete, AiOutlineShoppingCart } from 'react-icons/ai';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const links = [
 	{

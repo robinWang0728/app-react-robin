@@ -4,7 +4,10 @@
 		"target": "es2016",
 		"jsx": "preserve",
 		"baseUrl": "./src",
-		"checkJs": true
+		"checkJs": true,
+		"paths": {
+			"@modules/*": ["./src/modules/*"]
+		}
 	},
 	"exclude": ["node_modules", "**/node_modules/*"],
 	"javascript.preferences.importModuleSpecifier": "non-relative"

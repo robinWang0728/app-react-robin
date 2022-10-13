@@ -7,7 +7,7 @@ const Contact = () => {
 	const { showLoading, hideLoading } = useContext(LoadingContext);
 
 	const validate = (values) => {
-		let errors = {};
+		const errors = {};
 
 		if (!values.contactName) {
 			errors.contactName = 'contactName is required';
@@ -28,7 +28,7 @@ const Contact = () => {
 		console.log(data);
 		try {
 			showLoading();
-			let response = await ContactService.createContact(data);
+			const response = await ContactService.createContact(data);
 			hideLoading();
 			console.log(response);
 		} catch (error) {

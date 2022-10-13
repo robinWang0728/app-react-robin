@@ -48,21 +48,21 @@ export const useLoginFormValidator = (form) => {
 			const emailMessage = emailValidator(email, form);
 			nextErrors.email.error = !!emailMessage;
 			nextErrors.email.message = emailMessage;
-			if (!!emailMessage) isValid = false;
+			if (emailMessage) isValid = false;
 		}
 
 		if (nextErrors.password.dirty && (field ? field === 'password' : true)) {
 			const passwordMessage = passwordValidator(password, form);
 			nextErrors.password.error = !!passwordMessage;
 			nextErrors.password.message = passwordMessage;
-			if (!!passwordMessage) isValid = false;
+			if (passwordMessage) isValid = false;
 		}
 
 		if (nextErrors.confirmPassword.dirty && (field ? field === 'confirmPassword' : true)) {
 			const confirmPasswordMessage = confirmPasswordValidator(confirmPassword, form);
 			nextErrors.confirmPassword.error = !!confirmPasswordMessage;
 			nextErrors.confirmPassword.message = confirmPasswordMessage;
-			if (!!confirmPasswordMessage) isValid = false;
+			if (confirmPasswordMessage) isValid = false;
 		}
 
 		setErrors(nextErrors);

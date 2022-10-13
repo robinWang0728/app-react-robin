@@ -84,6 +84,4 @@ setting.json
 "[javascript]": {
 "editor.defaultFormatter": "esbenp.prettier-vscode"
 },
-"typescript.validate.enable": false,
-"javascript.validate.enable": false
 }

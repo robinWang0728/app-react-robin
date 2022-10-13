@@ -1,11 +1,10 @@
 import React from 'react';
 import { IoMdSpeedometer } from 'react-icons/io';
 import { MdDeliveryDining, MdOutlineExplore } from 'react-icons/md';
-import { BsTrophy } from 'react-icons/bs';
+import { BsTrophy, BsCreditCard, BsQuestionCircle } from 'react-icons/bs';
 import { AiOutlinePieChart, AiFillCalendar } from 'react-icons/ai';
 
 import { BiTrendingUp } from 'react-icons/bi';
-import { BsCreditCard, BsQuestionCircle } from 'react-icons/bs';
 import { NavLink } from 'react-router-dom';
 
 const SideBar = () => {
