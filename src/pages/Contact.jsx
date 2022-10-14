@@ -50,23 +50,23 @@ const Contact = () => {
 							<form onSubmit={handleFormSubmit}>
 								<div className='contact__form-form-item m-t-24'>
 									<div className='w-50'>
-										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='contactName' placeholder='Name' onChange={handleInputChange} value={formInputs.contactName} />
+										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='contactName' placeholder='Name' onChange={handleInputChange} value={formInputs.contactName || ''} />
 										{errors.contactName && <p className='text-danger'>{errors.contactName}</p>}
 									</div>
 									<div className='w-50'>
-										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='email' placeholder='email' onChange={handleInputChange} value={formInputs.email} />
+										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='email' placeholder='email' onChange={handleInputChange} value={formInputs.email || ''} />
 										{errors.email && <p className='text-danger'>{errors.email}</p>}
 									</div>
 								</div>
 								<div className='contact__form-form-item  m-t-24'>
 									<div className='w-100'>
 										{' '}
-										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='subject' placeholder='Subject' onChange={handleInputChange} value={formInputs.subject} />
+										<input className={`contact__form-form-control ${true && 'is-danger'}`} type='text' name='subject' placeholder='Subject' onChange={handleInputChange} value={formInputs.subject || ''} />
 									</div>
 								</div>
 								<div className='contact__form-form-item  m-t-24'>
 									<div className='w-100'>
-										<textarea className='contact__form-form-control contact__form-form-control--textarea' name='message' placeholder='Message' onChange={handleInputChange} value={formInputs.message}></textarea>
+										<textarea className='contact__form-form-control contact__form-form-control--textarea' name='message' placeholder='Message' onChange={handleInputChange} value={formInputs.message || ''}></textarea>
 									</div>
 								</div>
 								<div className='contact__form-form-item  m-t-24'>

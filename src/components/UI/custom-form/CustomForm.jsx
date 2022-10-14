@@ -16,8 +16,10 @@ const useCustomForm = (
 		}
 		setIsSubmit(true);
 		validating();
-		console.log(JSON.stringify(formInputs, null, 2));
-		callback(formInputs);
+		// console.log(JSON.stringify(formInputs, null, 2));
+		if (Object.keys(errors).length === 0 && Object.keys(formInputs).length > 0) {
+			callback(formInputs);
+		}
 	};
 
 	const handleInputChange = (event) => {
