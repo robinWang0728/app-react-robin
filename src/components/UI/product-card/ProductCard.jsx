@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { cartActions } from 'store/cart/cartSlice';
 
 const ProductCard = (props) => {
+	console.log('ProductCard render');
 	const updateFavor = props.updateFavor;
 	const { id, productName, image, price, favor } = props.item;
 	const dispatch = useDispatch();

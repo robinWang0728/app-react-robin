@@ -3,6 +3,7 @@ import useOutsideClick from './useOutSideClick';
 import './custom-select.css';
 
 const CustomSelect = ({ options, value, error = false, name, onChange }) => {
+	console.log('CustomSelect3 render');
 	const [isOpen, setOpen] = useState(false);
 	const [selected, setSelected] = useState(value);
 	const selectRef = useRef(null);
@@ -12,6 +13,7 @@ const CustomSelect = ({ options, value, error = false, name, onChange }) => {
 	});
 
 	useEffect(() => {
+		console.log('CustomSelect3 useEffect');
 		const element = document.getElementById(name);
 		element.value = selected;
 		const customEvent = new Event('change', { bubbles: true, cancelable: false });

@@ -10,7 +10,7 @@ const ProductList = () => {
 
 	const [productList, setProductList] = useState([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	console.log('render');
+	console.log('ProductList render');
 	const handleSortChange = (e) => {
 		if (e.target.value === 'desc') {
 			setProductList((state) => {
@@ -49,6 +49,7 @@ const ProductList = () => {
 
 	useEffect(() => {
 		getProducts();
+		console.log('ProductList useEffect');
 	}, []);
 
 	const updateFavor = (data) => {

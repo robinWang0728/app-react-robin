@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { usePagination } from './usePagination';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 const Pagination = (props) => {
+	console.log('Pagination render');
+	useEffect(() => {
+		console.log('Pagination useEffect');
+	}, []);
 	const { onPageChange, currentPage, totalCount, pageLimitSize, className } = props;
 	const { totalPages, renderPagination } = usePagination({
 		totalCount,

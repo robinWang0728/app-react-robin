@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 export const DEFAULT_SHOW_PAGINATION_PAGE_NUM = 3;
 
 export const usePagination = ({ totalCount, pageLimitSize, position }) => {
+	console.log('usePagination render');
 	const paginationRange = useMemo(() => {
 		if (totalCount < 0 || pageLimitSize < 1 || position < 0) return { totalPages: 0, renderPagination: [] };
 
