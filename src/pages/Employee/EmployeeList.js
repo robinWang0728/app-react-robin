@@ -1,9 +1,16 @@
 import { EmployeeContext } from 'contexts/Employee/EmployeeContext';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { FiEdit } from 'react-icons/fi';
+import { MdOutlineDeleteForever } from 'react-icons/md';
 export const EmployeeList = () => {
+	const navigate = useNavigate();
 	const { employees, removeEmployee } = useContext(EmployeeContext);
+
+	const editEmployee = (id) => () => {
+		console.log(id);
+		navigate(`editEmployee/${id}`);
+	};
 	return (
 		<React.Fragment>
 			{employees.length > 0 ? (
@@ -21,6 +28,7 @@ export const EmployeeList = () => {
 								<div className='emplyee__list-table-row-item'>Name</div>
 								<div className='emplyee__list-table-row-item'>Gender</div>
 								<div className='emplyee__list-table-row-item'>Phone</div>
+								<div className='emplyee__list-table-row-item'></div>
 							</div>
 
 							{employees.map((employee) => (
@@ -29,6 +37,14 @@ export const EmployeeList = () => {
 									<div className='emplyee__list-table-row-item'>{employee.name}</div>
 									<div className='emplyee__list-table-row-item'>{employee.gender}</div>
 									<div className='emplyee__list-table-row-item'>{employee.phone}</div>
+									<div className='emplyee__list-table-row-item'>
+										<div className='emplyee__list-btn' onClick={editEmployee(employee.id)}>
+											<FiEdit className='icon font-size-16' />
+										</div>
+										<div className='emplyee__list-btn' onClick={() => removeEmployee(employee.id)}>
+											<MdOutlineDeleteForever className='icon font-size-20' />
+										</div>
+									</div>
 								</div>
 							))}
 
@@ -40,6 +56,7 @@ export const EmployeeList = () => {
 									<div className='emplyee__list-table-row-item'>sub text 1</div>
 									<div className='emplyee__list-table-row-item'>sub text 2</div>
 								</div>
+								<div className='emplyee__list-table-row-item'>text 4</div>
 							</div>
 						</div>
 					</div>

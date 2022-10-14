@@ -34,6 +34,10 @@ a {
 	.flex-b-#{$i} {
 		flex-basis: $i * 1% !important;
 	}
+
+	.font-size-#{$i} {
+		font-size: #{($i * 1)}px !important;
+	}
 }
 .flex-column {
 	flex-direction: column !important;

@@ -1,6 +1,7 @@
+import { EmployeeProvider } from 'contexts/Employee/EmployeeContext';
 import Contact from 'pages/Contact';
 import { AddEmployee } from 'pages/Employee/AddEmployee';
-import { EditEmployee } from 'pages/Employee/EditEmployee';
+import EditEmployee from 'pages/Employee/EditEmployee';
 import Employee from 'pages/Employee/Employee';
 import { EmployeeList } from 'pages/Employee/EmployeeList';
 import Home from 'pages/Home';
@@ -32,7 +33,7 @@ const Routers = () => {
 			</Route>
 			<Route path='/employee/*' element={<Employee />}>
 				<Route path='addEmployee' element={<AddEmployee />} />
-				<Route path='editEmployee' element={<EditEmployee />} />
+				<Route path='editEmployee/:id' element={<EditEmployee />} />
 				<Route path='' element={<EmployeeList />} />
 			</Route>
 			<Route path='/contact' element={<Contact />} />
