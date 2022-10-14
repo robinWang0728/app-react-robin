@@ -1,30 +1,39 @@
 import { EmployeeContext } from 'contexts/Employee/EmployeeContext';
+import { LoadingContext } from 'contexts/LoadingContext';
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
+import EmployeeService from 'services/EmployeeService';
 
 const EditEmployee = () => {
+	const { employees, editEmployee } = useContext(EmployeeContext);
+	const { showLoading, hideLoading } = useContext(LoadingContext);
 	const navigate = useNavigate();
 	const params = useParams();
-	const { employees, editEmployee } = useContext(EmployeeContext);
+
 	const [selectedEmployee, setSelectedEmployee] = useState({
 		id: null,
 		name: '',
 		gender: '',
 		phone: '',
 	});
-	const currentUserId = params.id;
+	const currentEmployeeId = params.id;
 
 	useEffect(() => {
-		const employeeId = currentUserId;
-		const employee = employees.find((employee) => employee.id === parseInt(employeeId));
-		console.log(employee);
+		const employee = employees.find((employee) => employee.id === currentEmployeeId);
 		setSelectedEmployee(employee);
-	}, [currentUserId, employees]);
+	}, [currentEmployeeId, employees]);
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		editEmployee(selectedEmployee);
-		navigate('/employee');
+	const onSubmit = async (e) => {
+		try {
+			e.preventDefault();
+			showLoading();
+			const response = await EmployeeService.updateEmployee(currentEmployeeId, selectedEmployee);
+			editEmployee(selectedEmployee);
+			hideLoading();
+			navigate('/employee');
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	const handleOnChange = (userKey, newValue) => setSelectedEmployee({ ...selectedEmployee, [userKey]: newValue });
@@ -35,7 +44,7 @@ const EditEmployee = () => {
 
 	return (
 		<React.Fragment>
-			<div className='w-full max-w-sm container mt-20 mx-auto'>
+			<div className=''>
 				<form onSubmit={onSubmit}>
 					<div>
 						Name
@@ -52,7 +61,7 @@ const EditEmployee = () => {
 					<div>
 						<button type='submit'>Edit Employee</button>
 					</div>
-					<div className='text-center mt-4 text-gray-500'>
+					<div className=''>
 						<Link to='/employee'>Cancel</Link>
 					</div>
 				</form>

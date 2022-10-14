@@ -9,7 +9,7 @@
 		height: 100%;
 		background: #fff;
 		display: flex;
-		flex-flow: column wrap;
+		flex-flow: column nowrap;
 		border-radius: 10px;
 
 		.emplyee__list-title {

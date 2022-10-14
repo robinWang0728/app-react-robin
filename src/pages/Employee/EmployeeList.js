@@ -1,21 +1,42 @@
 import { EmployeeContext } from 'contexts/Employee/EmployeeContext';
-import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
 import { MdOutlineDeleteForever } from 'react-icons/md';
+import { LoadingContext } from 'contexts/LoadingContext';
+import EmployeeService from 'services/EmployeeService';
 export const EmployeeList = () => {
 	const navigate = useNavigate();
-	const { employees, removeEmployee } = useContext(EmployeeContext);
-
+	const { employees, removeEmployee, findEmployees } = useContext(EmployeeContext);
+	const { showLoading, hideLoading } = useContext(LoadingContext);
 	const editEmployee = (id) => () => {
-		console.log(id);
 		navigate(`editEmployee/${id}`);
 	};
+
+	const getEmployees = async () => {
+		try {
+			showLoading();
+			const response = await EmployeeService.getAllEmployee();
+			const list = response.data;
+			findEmployees(list);
+			hideLoading();
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	useEffect(() => {
+		getEmployees();
+	}, []);
+
 	return (
 		<React.Fragment>
 			{employees.length > 0 ? (
 				<React.Fragment>
 					<div className='emplyee__list'>
+						<div className='emplyee__list-btn' onClick={() => navigate(`addEmployee`)}>
+							add employee
+						</div>
 						<div className='emplyee__list-title m-t-24'>
 							<div className='emplyee__list-title-text'>Employee Table</div>
 							<div className='emplyee__list-title-search'>

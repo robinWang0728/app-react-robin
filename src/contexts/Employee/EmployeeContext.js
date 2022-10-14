@@ -1,45 +1,9 @@
 import React, { createContext, useReducer } from 'react';
+import EmployeeService from 'services/EmployeeService';
 import employeeReducer from './employeeReducer';
 
 const initialState = {
-	employees: [
-		{
-			id: 1,
-			name: 'jim',
-			gender: 'man',
-			phone: '0912123456',
-		},
-		{
-			id: 2,
-			name: 'iu',
-			gender: 'woman',
-			phone: '0912123456',
-		},
-		{
-			id: 3,
-			name: 'irene',
-			gender: 'woman',
-			phone: '0923423436',
-		},
-		{
-			id: 4,
-			name: 'robin',
-			gender: 'man',
-			phone: '0999876678',
-		},
-		{
-			id: 5,
-			name: 'daniel',
-			gender: 'man',
-			phone: '0922312346',
-		},
-		{
-			id: 6,
-			name: 'kim',
-			gender: 'man',
-			phone: '0911123556',
-		},
-	],
+	employees: [],
 };
 
 export const EmployeeContext = createContext(initialState);
@@ -47,12 +11,25 @@ export const EmployeeContext = createContext(initialState);
 export const EmployeeProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(employeeReducer, initialState);
 
-	function addEmployee(employee) {
+	const findEmployees = (employees) => {
 		// @ts-ignore
 		dispatch({
-			type: 'ADD_EMPLOYEE',
-			payload: employee,
+			type: 'FIND_EMPLOYEES',
+			payload: employees,
 		});
+	};
+	function addEmployee(employee) {
+		EmployeeService.createEmployee(employee)
+			.then((response) => {
+				// @ts-ignore
+				dispatch({
+					type: 'ADD_EMPLOYEE',
+					payload: response.data,
+				});
+			})
+			.catch((e) => {
+				console.log(e);
+			});
 	}
 
 	function editEmployee(employee) {
@@ -64,6 +41,7 @@ export const EmployeeProvider = ({ children }) => {
 	}
 
 	function removeEmployee(id) {
+		EmployeeService.deleteEmployee(id);
 		// @ts-ignore
 		dispatch({
 			type: 'REMOVE_EMPLOYEE',
@@ -75,6 +53,7 @@ export const EmployeeProvider = ({ children }) => {
 		<EmployeeContext.Provider
 			value={{
 				employees: state.employees,
+				findEmployees,
 				addEmployee,
 				editEmployee,
 				removeEmployee,

@@ -1,16 +1,22 @@
 export default function employeeReducer(state, action) {
 	switch (action.type) {
+		case 'FIND_EMPLOYEES':
+			return {
+				...state,
+				loading: false,
+				error: '',
+				employees: action.payload,
+			};
 		case 'ADD_EMPLOYEE':
 			return {
 				...state,
+				loading: false,
+				error: '',
 				employees: [...state.employees, action.payload],
 			};
 
-		case 'EDIT_EMPLOYEE':
-			// eslint-disable-next-line no-case-declarations
+		case 'EDIT_EMPLOYEE': {
 			const updatedEmployee = action.payload;
-
-			// eslint-disable-next-line no-case-declarations
 			const updatedEmployees = state.employees.map((employee) => {
 				if (employee.id === updatedEmployee.id) {
 					return updatedEmployee;
@@ -22,7 +28,7 @@ export default function employeeReducer(state, action) {
 				...state,
 				employees: updatedEmployees,
 			};
-
+		}
 		case 'REMOVE_EMPLOYEE':
 			return {
 				...state,
