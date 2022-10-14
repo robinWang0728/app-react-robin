@@ -1,40 +1,83 @@
 import { EmployeeContext } from 'contexts/Employee/EmployeeContext';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
 import { MdOutlineDeleteForever } from 'react-icons/md';
 import { LoadingContext } from 'contexts/LoadingContext';
 import EmployeeService from 'services/EmployeeService';
-export const EmployeeList = () => {
+import { useMutation, useQuery } from 'react-query';
+
+/*
+useQuery的响应返回非常重要。它具有以下属性。
+
+data,
+error,
+failureCount,
+isError,
+isFetchedAfterMount,
+isFetching,
+isIdle,
+isLoading,
+isPreviousData,
+isStale,
+isSuccess,
+refetch,
+remove,
+status,
+
+ */
+export const EmployeeListForReactQuery = () => {
 	const navigate = useNavigate();
-	const { employees, removeEmployee, findEmployees } = useContext(EmployeeContext);
-	const { showLoading, hideLoading } = useContext(LoadingContext);
-	const editEmployee = (id) => () => {
-		navigate(`editEmployee/${id}`);
-	};
+	const [employees, setEmployees] = useState([]);
 
-	const getEmployees = async () => {
-		try {
-			showLoading();
-			const response = await EmployeeService.getAllEmployee();
-			const list = response.data;
-			findEmployees(list);
-			hideLoading();
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	const {
+		isLoading,
+		isFetching,
+		refetch: getAllEmployee,
+		status,
+		data: queryData,
+	} = useQuery(
+		'findEmployees',
+		async () => {
+			return await EmployeeService.getAllEmployee();
+		},
+		{
+			enabled: true,
+			onSuccess: (res) => {
+				setEmployees(res.data);
+				console.log(res);
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		},
+	);
 
-	useEffect(() => {
-		getEmployees();
-	}, []);
+	const { isLoading: deleteLoading, mutate: deleteByEmployeeId } = useMutation(
+		async (id) => {
+			return await EmployeeService.deleteEmployee(id);
+		},
+		{
+			onSuccess: (res) => {
+				getAllEmployee();
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		},
+	);
 
 	return (
 		<React.Fragment>
-			{employees.length > 0 ? (
+			{JSON.stringify(queryData.data)}
+			{isLoading && 'Loading中...'}
+			{isFetching && 'Fetching中...'}
+			{status === 'error' && <p>Error fetching data</p>}
+			{status === 'loading' && <p>Fetching data...</p>}
+			{status === 'success' && employees.length > 0 ? (
 				<React.Fragment>
 					<div className='emplyee__list'>
-						<div className='emplyee__list-btn' onClick={() => navigate(`addEmployee`)}>
+						<div className='emplyee__list-btn' onClick={() => navigate(`addEmployeeForReactQuery`)}>
 							add employee
 						</div>
 						<div className='emplyee__list-title m-t-24'>
@@ -59,10 +102,10 @@ export const EmployeeList = () => {
 									<div className='emplyee__list-table-row-item'>{employee.gender}</div>
 									<div className='emplyee__list-table-row-item'>{employee.phone}</div>
 									<div className='emplyee__list-table-row-item'>
-										<div className='emplyee__list-btn' onClick={editEmployee(employee.id)}>
+										<div className='emplyee__list-btn' onClick={() => navigate(`editEmployeeForReactQuery/${employee.id}`)}>
 											<FiEdit className='icon font-size-16' />
 										</div>
-										<div className='emplyee__list-btn' onClick={() => removeEmployee(employee.id)}>
+										<div className='emplyee__list-btn' onClick={() => deleteByEmployeeId(employee.id)}>
 											<MdOutlineDeleteForever className='icon font-size-20' />
 										</div>
 									</div>

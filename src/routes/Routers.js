@@ -4,6 +4,10 @@ import { AddEmployee } from 'pages/Employee/AddEmployee';
 import EditEmployee from 'pages/Employee/EditEmployee';
 import Employee from 'pages/Employee/Employee';
 import { EmployeeList } from 'pages/Employee/EmployeeList';
+import { AddEmployeeForReactQuery } from 'pages/EmployeeForReactQuery/AddEmployeeForReactQuery';
+import EditEmployeeForReactQuery from 'pages/EmployeeForReactQuery/EditEmployeeForReactQuery';
+import EmployeeForReactQuery from 'pages/EmployeeForReactQuery/EmployeeForReactQuery';
+import { EmployeeListForReactQuery } from 'pages/EmployeeForReactQuery/EmployeeListForReactQuery';
 import Home from 'pages/Home';
 import AddProductForFormik from 'pages/Product/AddProductForFormik';
 import AddProductForHookForm from 'pages/Product/AddProductForHookForm';
@@ -36,6 +40,13 @@ const Routers = () => {
 				<Route path='editEmployee/:id' element={<EditEmployee />} />
 				<Route path='' element={<EmployeeList />} />
 			</Route>
+
+			<Route path='/employeeForReactQuery/*' element={<EmployeeForReactQuery />}>
+				<Route path='addEmployeeForReactQuery' element={<AddEmployeeForReactQuery />} />
+				<Route path='editEmployeeForReactQuery/:id' element={<EditEmployeeForReactQuery />} />
+				<Route path='' element={<EmployeeListForReactQuery />} />
+			</Route>
+
 			<Route path='/contact' element={<Contact />} />
 		</Routes>
 	);

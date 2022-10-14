@@ -1,24 +1,36 @@
 import { EmployeeContext } from 'contexts/Employee/EmployeeContext';
 import React, { useState, useContext } from 'react';
+import { useMutation } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
+import EmployeeService from 'services/EmployeeService';
 
-export const AddEmployee = () => {
+export const AddEmployeeForReactQuery = () => {
 	const navigate = useNavigate();
-
-	const { addEmployee } = useContext(EmployeeContext);
+	const { isLoading, mutate: addEmployee } = useMutation(
+		async () => {
+			const newEmployee = {
+				name,
+				gender,
+				phone,
+			};
+			return await EmployeeService.createEmployee(newEmployee);
+		},
+		{
+			onSuccess: (res) => {
+				navigate('/employeeForReactQuery');
+			},
+			onError: (err) => {
+				console.log(err);
+			},
+		},
+	);
 
 	const [name, setName] = useState('');
 	const [gender, setGender] = useState('');
 	const [phone, setPhone] = useState('');
 	const onSubmit = (e) => {
 		e.preventDefault();
-		const newEmployee = {
-			name,
-			gender,
-			phone,
-		};
-		addEmployee(newEmployee);
-		navigate('/employee');
+		addEmployee();
 	};
 
 	return (
