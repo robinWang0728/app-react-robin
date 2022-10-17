@@ -12,11 +12,16 @@ const WebrtcForCamera4 = () => {
 		return { audio: false, video: { facingMode: isBackCamera ? 'user' : 'environment' } };
 	}, [isBackCamera]);
 
-	const [error, mediaStream] = useUserMedia(constraints);
+	const { error, state, mediaStream } = useUserMedia(constraints);
 
-	if (mediaStream && videoRef.current) {
+	useEffect(() => {
+		if (state !== 'resolved' || !mediaStream) {
+			return;
+		}
+
 		videoRef.current.srcObject = mediaStream;
-	}
+		videoRef.current.play();
+	}, [state, mediaStream]);
 
 	const changeCamera = () => {
 		setIsBackCamera(!isBackCamera);
@@ -36,6 +41,18 @@ const WebrtcForCamera4 = () => {
 			1,
 		);
 	};
+	if (state === 'pending') {
+		return <p>{'Waiting...'}</p>;
+	}
+
+	if (state === 'rejected') {
+		return (
+			<p>
+				{'Error: '}
+				{error.message}
+			</p>
+		);
+	}
 
 	return (
 		<div className='webrtc'>

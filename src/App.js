@@ -4,12 +4,15 @@ import { CssBaseline } from '@mui/material';
 import './styles/main.scss';
 import { LoadingProvider } from 'contexts/LoadingContext';
 import Spinner from 'components/Spinner/Spinner';
-import TestCutsomHookAndState from 'testOtherExample/test1/TestCutsomHookAndState';
 
 const App = () => {
 	return (
 		<>
-			<TestCutsomHookAndState />
+			<LoadingProvider>
+				<Spinner />
+				<CssBaseline />
+				<Layout />
+			</LoadingProvider>
 		</>
 	);
 };

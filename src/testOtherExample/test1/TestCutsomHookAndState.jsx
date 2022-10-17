@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useUserMedia } from './useUserMedia';
+import { useUserMedia } from './useUserMedia2';
 
 const TestCutsomHookAndState = () => {
 	console.log('TestCutsomHookAndState render');

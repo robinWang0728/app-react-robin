@@ -1,32 +1,31 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useDebugValue } from 'react';
 
 export function useUserMedia(constraints) {
 	const [mediaStream, setMediaStream] = useState();
 	const [error, setError] = useState();
+	const [state, setState] = useState('pending');
+	useDebugValue({ error, state, mediaStream });
 
 	useEffect(() => {
+		setState('pending');
 		const userMediaError = checkUserMediaError();
 		if (userMediaError) {
-			// @ts-ignore
 			setError(userMediaError);
+			setState('rejected');
 			return;
 		}
 		async function enableVideoStream() {
 			try {
 				const stream = await navigator.mediaDevices.getUserMedia(constraints);
 				setMediaStream(stream);
+				setState('resolved');
 			} catch (err) {
 				setError(err);
+				setState('rejected');
 			}
 		}
 		enableVideoStream();
 	}, [constraints]);
-
-	// useEffect(() => console.log('mount'), []);
-	// useEffect(() => console.log('data1 update'), [mediaStream]);
-	// useEffect(() => console.log('any update'));
-	// useEffect(() => () => console.log('data1 update or unmount'), [mediaStream]);
-	// useEffect(() => () => console.log('unmount'), []);
 
 	useEffect(() => {
 		return () => {
@@ -37,7 +36,7 @@ export function useUserMedia(constraints) {
 		};
 	}, [mediaStream]);
 
-	return [error, mediaStream];
+	return { error, state, mediaStream };
 }
 function checkUserMediaError() {
 	if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
