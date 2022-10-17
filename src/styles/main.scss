@@ -31,6 +31,11 @@ a {
 	.m-t-#{$i} {
 		margin-top: #{($i * 1)}px !important;
 	}
+	.m-x-#{$i} {
+		margin-left: #{($i * 1)}px !important;
+		margin-right: #{($i * 1)}px !important;
+	}
+
 	.flex-b-#{$i} {
 		flex-basis: $i * 1% !important;
 	}

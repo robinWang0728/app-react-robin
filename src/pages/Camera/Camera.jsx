@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { IoCameraReverseOutline } from 'react-icons/io5';
 import { useUserMedia } from './hook/useUserMedia';
 
 const Camera = () => {
@@ -26,12 +27,15 @@ const Camera = () => {
 		setIsBackCamera(!isBackCamera);
 	};
 
-	const onClickzp = () => {
+	const takePicture = () => {
 		const context = canvasRef.current.getContext('2d');
 		canvasRef.current.width = videoRef.current.videoWidth;
 		canvasRef.current.height = videoRef.current.videoHeight;
 		context.drawImage(videoRef.current, 0, 0);
+		setIsTakePic(true);
+	};
 
+	const confrimPic = () => {
 		canvasRef.current.toBlob(
 			(blob) => {
 				console.log(blob);
@@ -39,6 +43,14 @@ const Camera = () => {
 			'image/jpeg',
 			1,
 		);
+		const img = canvasRef.current.toDataURL('image/png');
+		console.log(img);
+	};
+	const backPic = () => {
+		setIsTakePic(false);
+		const context = canvasRef.current.getContext('2d').clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+		canvasRef.current.width = 0;
+		canvasRef.current.height = 0;
 	};
 
 	if (state === 'pending') {
@@ -56,25 +68,23 @@ const Camera = () => {
 
 	return (
 		<div className='camera'>
-			<div>當前攝像頭：{isBackCamera ? '前置' : '後置'}</div>
-
-			<div className='camera__btns'>
+			<div className='camera__btns camera__btns--top'>
 				<button className='camera__btn' onClick={changeCamera}>
-					切換攝像頭
+					<IoCameraReverseOutline className='icon' />
 				</button>
 			</div>
 			<div className='camera__main'>
 				<video className='camera__video' ref={videoRef} playsInline autoPlay></video>
-				<canvas className='camera__canvas' ref={canvasRef}></canvas>
+				<canvas className={`camera__canvas ${isTakePic ? '' : 'hide'}`} ref={canvasRef}></canvas>
 			</div>
-			<div className='camera__btns'>
-				<button className='camera__btn' onClick={changeCamera}>
+			<div className='camera__btns camera__btns--bottom'>
+				<button className={`camera__btn ${!isTakePic ? '' : 'hide'}`} onClick={takePicture}>
 					拍照
 				</button>
-				<button className='camera__btn' onClick={changeCamera}>
+				<button className={`camera__btn ${isTakePic ? '' : 'hide'} m-x-8`} onClick={confrimPic}>
 					確認照片
 				</button>
-				<button className='camera__btn' onClick={changeCamera}>
+				<button className={`camera__btn ${isTakePic ? '' : 'hide'} m-x-8`} onClick={backPic}>
 					取消
 				</button>
 			</div>
