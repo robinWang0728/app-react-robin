@@ -12,17 +12,15 @@ export function useUserMedia(requestedMedia) {
 				// Handle the error
 			}
 		}
-
-		if (!mediaStream) {
-			enableVideoStream();
-		} else {
+		enableVideoStream();
+		if (mediaStream) {
 			return function cleanup() {
 				mediaStream.getTracks().forEach((track) => {
 					track.stop();
 				});
 			};
 		}
-	}, [mediaStream, requestedMedia]);
+	}, [requestedMedia]);
 
 	return mediaStream;
 }

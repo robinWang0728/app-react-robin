@@ -15,6 +15,7 @@ import ProductList from 'pages/Product/ProductList';
 import Proudct from 'pages/Product/Products';
 import WebrtcForCamera from 'pages/WebrtcForCamera/WebrtcForCamera';
 import WebrtcForCamera4 from 'pages/WebrtcForCamera/WebrtcForCamera4';
+import WebrtcForCamera5 from 'pages/WebrtcForCamera/WebrtcForCamera5';
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
@@ -48,7 +49,7 @@ const Routers = () => {
 				<Route path='editEmployeeForReactQuery/:id' element={<EditEmployeeForReactQuery />} />
 				<Route path='' element={<EmployeeListForReactQuery />} />
 			</Route>
-			<Route path='/camera' element={<WebrtcForCamera4 />}></Route>
+			<Route path='/camera' element={<WebrtcForCamera5 />}></Route>
 			<Route path='/contact' element={<Contact />} />
 		</Routes>
 	);
