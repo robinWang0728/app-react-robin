@@ -12,7 +12,7 @@ const WebrtcForCamera4 = () => {
 		return { audio: false, video: { facingMode: isBackCamera ? 'user' : 'environment' } };
 	}, [isBackCamera]);
 
-	const mediaStream = useUserMedia(constraints);
+	const [error, mediaStream] = useUserMedia(constraints);
 
 	if (mediaStream && videoRef.current) {
 		videoRef.current.srcObject = mediaStream;

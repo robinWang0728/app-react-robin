@@ -15,10 +15,20 @@ export function useUserMedia(requestedMedia) {
 			setMediaStream(tt);
 		} else {
 			return () => {
-				console.log('Will Unmounted' + mediaStream);
+				console.log('useUserMedia useEffect end' + mediaStream);
 			};
 		}
 	}, [requestedMedia]);
+
+	useEffect(() => {
+		console.log('effect mediaStream' + mediaStream);
+		return () => {
+			if (!mediaStream) {
+				return;
+			}
+			console.log('effect mediaStream end' + mediaStream);
+		};
+	}, [mediaStream]);
 
 	return mediaStream;
 }
