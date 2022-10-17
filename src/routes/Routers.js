@@ -13,11 +13,12 @@ import AddProductForFormik from 'pages/Product/AddProductForFormik';
 import AddProductForHookForm from 'pages/Product/AddProductForHookForm';
 import ProductList from 'pages/Product/ProductList';
 import Proudct from 'pages/Product/Products';
-import WebrtcForCamera from 'pages/WebrtcForCamera/WebrtcForCamera';
-import WebrtcForCamera4 from 'pages/WebrtcForCamera/WebrtcForCamera4';
-import WebrtcForCamera5 from 'pages/WebrtcForCamera/WebrtcForCamera5';
+import WebrtcForCamera from 'testOtherExample/WebrtcForCamera/WebrtcForCamera';
+import WebrtcForCamera4 from 'testOtherExample/WebrtcForCamera/WebrtcForCamera4';
+import WebrtcForCamera5 from 'testOtherExample/WebrtcForCamera/WebrtcForCamera5';
 import React, { Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import Camera from 'pages/Camera/Camera';
 
 const Routers = () => {
 	const Home = React.lazy(() => import('pages/Home'));
@@ -49,7 +50,7 @@ const Routers = () => {
 				<Route path='editEmployeeForReactQuery/:id' element={<EditEmployeeForReactQuery />} />
 				<Route path='' element={<EmployeeListForReactQuery />} />
 			</Route>
-			<Route path='/camera' element={<WebrtcForCamera5 />}></Route>
+			<Route path='/camera' element={<Camera />}></Route>
 			<Route path='/contact' element={<Contact />} />
 		</Routes>
 	);

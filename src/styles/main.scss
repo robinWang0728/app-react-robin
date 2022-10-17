@@ -93,6 +93,10 @@ body {
 	color: $red;
 }
 
+.hide {
+	display: none !important;
+}
+
 @import 'header';
 @import 'product';
 @import 'cart';
@@ -101,3 +105,4 @@ body {
 @import 'spinner.scss';
 @import 'pagination.scss';
 @import 'employee.scss';
+@import 'camera.scss';

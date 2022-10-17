@@ -1,0 +1,72 @@
+.camera {
+	background-color: #000;
+	position: fixed;
+	display: block;
+	opacity: 1;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	z-index: 9999;
+
+	.camera__video,
+	.camera__canvas {
+		transform: translate(-50%, -50%);
+		position: fixed;
+		object-fit: contain;
+		left: 50%;
+		top: 50%;
+		max-width: 100%;
+		max-height: 100%;
+		width: 100%;
+	}
+
+	.camera__btns {
+		z-index: 3;
+		position: absolute;
+		padding: 16px 0;
+		width: 100%;
+		display: flex;
+
+		&--top {
+			top: 0;
+			justify-content: flex-end;
+		}
+
+		&--bottom {
+			bottom: 0;
+			justify-content: center;
+		}
+		.camera__btn {
+			background: #dddddd;
+			border: none;
+			border-radius: 50%;
+			color: #e4ecfa;
+			cursor: pointer;
+			width: 50px;
+			height: 50px;
+			position: relative;
+			transition: 0.5s;
+			&:hover {
+				background: #ffffff;
+				&:before {
+					transform: scale(1.05);
+				}
+			}
+
+			&:before {
+				border-radius: 50%;
+				border: 2px solid #dddddd;
+				box-shadow: 0px 0px 10px 5px rgb(0 0 0 / 20%);
+				content: '';
+				position: absolute;
+				height: 60px;
+				width: 60px;
+				margin-left: -5px;
+				margin-top: -5px;
+				transform: scale(1);
+				transition: all 300ms;
+			}
+		}
+	}
+}

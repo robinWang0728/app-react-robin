@@ -48,7 +48,7 @@
 
 // export default App;
 
-import WebrtcForCamera3 from 'pages/WebrtcForCamera/WebrtcForCamera3';
+import WebrtcForCamera3 from 'testOtherExample/WebrtcForCamera/WebrtcForCamera3';
 import React, { useState } from 'react';
 
 const App = () => {
